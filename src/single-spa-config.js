@@ -18,17 +18,22 @@ const runScript = async (url) => {
 /*
 * getManifest：远程加载manifest.json 文件，解析需要加载的js
 * */
-const getManifest = (url, bundle) => new Promise(async (resolve) => {
-    const { data } = await axios.get(url);
-    const { entrypoints, publicPath } = data;
-    const assets = entrypoints[bundle].assets;
-    for (let i = 0; i < assets.length; i++) {
-        await runScript(publicPath + assets[i]).then(() => {
-            if (i === assets.length - 1) {
-                resolve()
-            }
-        })
+const getManifest = (url, bundle) => new Promise(async (resolve,reject) => {
+    try{
+        const { data } = await axios.get(url);
+        const { entrypoints, publicPath } = data;
+        const assets = entrypoints[bundle].assets;
+        for (let i = 0; i < assets.length; i++) {
+            await runScript(publicPath + assets[i]).then(() => {
+                if (i === assets.length - 1) {
+                    resolve()
+                }
+            })
+        }
+    }catch(err){
+        reject(err)
     }
+    
 });
 
 singleSpa.registerApplication( //注册微前端服务
