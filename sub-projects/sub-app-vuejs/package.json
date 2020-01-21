@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "start": "npm run serve-vue",
     "serve-vue": "vue-cli-service serve --port 3000",
     "build": "vue-cli-service build",
     "server-dist": "node script/http-server.js dist 3100"

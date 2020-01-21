@@ -5,7 +5,7 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '/home',
     name: 'home',
     component: () => import('../views/Home.vue')
   },
@@ -20,8 +20,8 @@ const routes = [
 ]
 const router = new VueRouter({
   // 子项目设置history，base设置为父项目的一级路由。
-  base: '/vue/',
-  // mode: 'history',
+  base: '/device/',
+  mode: 'history',
   routes
 })
 
